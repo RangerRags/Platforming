@@ -35,23 +35,26 @@ int main(void) {
             }
 
         }
+
         if (y < ground) {
             yV += 1;
         }
+        ground =765;
         if (y>=ground) {
-            y=764;
+            y=ground-1;
+            yV=0;
         }
 
         for (int i=0;i<10;i++) {
             for (int j=0;j<10;j++) {
                 if (platforms[i][j]==1) {
-                 //   DrawRectangle(i*80,j*80,80,80,BLACK);
-                   // if (x>=i*80-20) {
-                     //   x=i*80-21;
-                   // }
-                    if (x>=i*80-20&&x<=i*80+60&&y>=j*80-20) {
-                        ground=j*80-20;
-                        y=j*80-21;
+
+                    if (x>=j*80-20&&x<=j*80+60&&y>=i*80-20) {
+                        ground=i*80-20;
+                        y=i*80-21;
+                    }
+                    if (x>=j*80&&y >= i*80 && y <= i*80+80) {
+                        x=j*80-20-1;
                     }
                 }
             }
@@ -63,7 +66,7 @@ int main(void) {
         for (int i=0;i<10;i++) {
             for (int j=0;j<10;j++) {
                 if (platforms[i][j]==1) {
-                    DrawRectangle(i*80,j*80,80,80,BLACK);
+                    DrawRectangle(j*80,i*80,80,80,BLACK);
                 }
             }
         }
