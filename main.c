@@ -24,18 +24,18 @@ int main(void) {
 
 
     while (!WindowShouldClose()) {
-        // 1. reset each frame
+        // reset each frame
         onGround = false;
         ground = 765;
 
-        // 2. input
+        //  input
         if (IsKeyDown(KEY_D)) x += 10;
         if (IsKeyDown(KEY_A)) x -= 10;
 
-        // 3. apply gravity
+        //  apply gravity
         if (!onGround) yV += 1;
 
-        // 4. move
+        //  move
         y += yV;
 
         // 5. platform collision
@@ -57,19 +57,26 @@ int main(void) {
             }
         }
 
-        // 6. floor collision
+        // floor collision
         if (y >= ground) {
             y = ground - 1;
             yV = 0;
             onGround = true;
         }
+        //screen boundaries
+        if (x>=780) {
+            x = 779;
+        }
+        if (x<=20) {
+            x = 21;
+        }
 
-        // 7. jump (after onGround is known)
+        //  jump (after onGround is known)
         if (IsKeyPressed(KEY_W) && onGround) {
             yV = -15;
         }
 
-        // 8. draw
+        //  draw
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawCircle(x, y, 20, BLACK);
